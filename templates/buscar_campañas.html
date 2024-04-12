@@ -1,0 +1,311 @@
+<?php
+session_start();
+include("connect.php");
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartSeed</title>
+    <link rel="stylesheet" href="../js/filtro.js">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../img/foteer.png">
+    <link rel="stylesheet" href="../img/hero.jpg">
+    <link rel="stylesheet" href="../img/logonav.jpeg">
+    <link rel="stylesheet" href="../js/app.js">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+<body>
+
+
+    <!-- navbar -->
+
+    <header>
+        <nav class="w-[90%] max-lg:w-screen mx-auto flex justify-between max-lg:flex-wrap items-center ">
+
+            <!-- logo -->
+
+            <div class="max-lg:order-1 p-1">
+                <a class="w-16 max-lg:m-4" href="index.html"><img src="img/logonav.jpeg" alt=""></a>
+            </div>
+
+            <!-- link de referencia  -->
+
+            <div id="menunav" class="h-fit w-full flex items-center px-5 mx-auto max-lg:hidden max-lg:order-3 ">
+                <ul class="flex items-center max-lg:flex-col gap-[4vw] mx-auto ">
+                    <li>
+                        <a href="buscar_campañas.html" class=" hover:text-gray-500 text-[#206A5D] ">Buscar Campañas</a>
+                    </li>
+                    <li>
+                        <a href="sobreNosotos.html" class=" hover:text-gray-500 text-[#206A5D] ">Sobre nosotros</a></a>
+                    </li>
+                    <li>
+                        <a href="misCampañas.html" class=" hover:text-gray-500 text-[#206A5D] ">Mis Campañas</a>
+                    </li>
+                    <li>
+                        <a href="IniciarCampañas.html" class=" hover:text-gray-500 text-[#206A5D] ">iniciar Campaña</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- botone de iniciar secion user y menu en dispositivos moviles -->
+            <div class="flex items-center gap-4 px-3 max-lg:order-2">
+
+
+                <button id="userA"
+                    class="bg-gradient-to-r from-[#A2D988]/50 to-[#66994E]/10 rounded-full h-11 w-28 text-[#206A5D]">
+                    iniciar Sesion
+                </button>
+
+                <!-- user -->
+                <div id="userB" class="dropdown dropdown-end hidden">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Tailwind CSS Navbar component"
+                                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0"
+                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li>
+                            <a class="justify-between" href="PerfilAjuste.html">
+                                Profile
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a href="PerfilAjuste.html">Settings</a></li>
+                        <li id="logOut"><a>Logout</a></li>
+                    </ul>
+                </div>
+                <button id="botonav" class="lg:hidden">
+                    <i class="fa-solid fa-bars fa-2xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <header>
+        <h1>Buscar Campañas</h1>
+        <div class="search-bar">
+            <input type="search" class="filtro-tarjeta" id="searchInput"
+                placeholder="Buscar por título, palabra clave o nombre de la persona">
+            <button onclick="search()">Buscar</button>
+        </div>
+    </header>
+
+    <aside>
+        <h2>Filtros</h2>
+        <ul role="list" class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
+            <li><a href="#">Tecnologia</a></li>
+            <li><a href="#">Arte y Creatividad</a></li>
+            <li><a href="#">Diseño</a></li>
+            <li><a href="#">Juegos y Entretenimiento</a></li>
+            <li><a href="#">Estudios</a></li>
+            <li><a href="#">Salud y Bienestar</a></li>
+            <li><a href="#">Medio Ambiente y Bienestar</a></li>
+            <li><a href="#">Viajes y Turismo</a></li>
+            <li><a href="#">Animales y Mascotas</a></li>
+            <li><a href="#">Negocios y Emprendimiento</a></li>
+
+        </ul>
+    </aside>
+
+    <main>
+        <div id="campaignsList">
+            <!-- Aquí se mostrarán las campañas -->
+            <div class="contenedor inline-grid grid-cols-3 gap-4">
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full"
+                            src="https://news.microsoft.com/wp-content/uploads/prod/sites/41/2016/01/Educacion_CREA_02.jpg"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Estudio en Tecnologia</div>
+                            <p class="text-gray-700 text-base">
+                                ayudame a continuar mi estudio en tecnología
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Tecnologia</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Estudio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full"
+                            src="https://www.shutterstock.com/image-photo/creativity-education-people-concept-group-260nw-693809029.jpg"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Me encanta Dibujar</div>
+                            <p class="text-gray-700 text-base">
+                                ayudame a que pueda seguir haciendo lo que mas me gusta, dibujar, te pido colaboracion
+                                de corazón
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#dibujo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full"
+                            src="https://cdn-cjpme.nitrocdn.com/RBveHUhgbLfgOUOOlhRIgWHSMTdPvbOz/assets/images/optimized/rev-9d49715/mediactiu.com/wp-content/uploads/2021/04/Por-que-necesito-contratar-los-servicios-de-disen%CC%83o-grafico.jpg"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">colaboracion para diseño</div>
+                            <p class="text-gray-700 text-base">
+                                ayudame a convertirme en un diseñador de interiores brindandome tu apoyo
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full"
+                            src="https://imagenes.eltiempo.com/files/image_1200_600/uploads/2020/09/29/5f73309d28451.jpeg"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Ayudame a estudiar</div>
+                            <p class="text-gray-700 text-base">
+                                brindame tu apoyo para que mis hijos puedan seguir estudiando, soy madre soltera y
+                                quiero que ellos sean profesionales algun dia, ayudame por favor
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full"
+                            src="https://i0.wp.com/encontraste.com.mx/wp-content/uploads/2021/06/CANCER.jpg?fit=768%2C479&ssl=1"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Salud de mi abuela</div>
+                            <p class="text-gray-700 text-base">
+                                ayudame a reunir para medicamentos, la salud de mi familiar depende de ello y son caros
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#ayudame
+                                a salvarla</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full" src="https://i.ytimg.com/vi/Zbfn9k6iZFM/maxresdefault.jpg"
+                            alt="Sunset in the mountains">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Fundacion de animales</div>
+                            <p class="text-gray-700 text-base">
+                                ayudame con mi fundacion de rescate de animales, a que pueda seguir llevando mas ayuda y
+                                alegría a sus corazones puedes ayudar desde $1.
+
+                            </p>
+                            <p>$1,000 US</p>
+                            <progress class="progress progress-success w-56" value="70" max="100"></progress>
+                            <button class="bg-green-500 rounded-lg boton">Dona ya!</button>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Mascotas</span>
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Rescate</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <button id="mas"
+                class="bg-gradient-to-r from-[#A2D988]/50 to-[#66994E]/10 rounded-full h-11 w-28 text-[#206A5D]">
+                Mas Campaña
+            </button>
+
+        </div>
+    </main>
+    <!-- footer -->
+
+    <footer class="footer p-10 space-x-auto max-lg:justify-items-center">
+        <aside>
+            <img src=".img/foteer.png" alt="">
+            <p class="text-[#206A5D]">StarSeed.<br> 2024</p>
+        </aside>
+        <nav class="flex flex-col ">
+            <h6 class="footer-title text-[#81B214]">Recaudacion de Fondos</h6>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Tecnologia</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Salud</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Emergencia</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Animales</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Educacion</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Animales</a>
+        </nav>
+        <nav class="flex flex-col ">
+            <h6 class="footer-title text-[#81B214]">Mas Informacion</h6>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Como Funciona</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Porque Nosotros</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Pregustas Frecuentes</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Soporte Tecnico</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Contactanos</a>
+        </nav>
+        <nav class="flex flex-col ">
+            <h6 class="footer-title self-center text-[#81B214]">Legal</h6>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Terminos de uso</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Privacy policy</a>
+            <a class="link link-hover self-center text-[#206A5D] font-medium">Cookie policy</a>
+        </nav>
+    </footer>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/menu.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

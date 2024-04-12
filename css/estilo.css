@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    margin-top: 10px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    width: 300px;
+}
+
+.search-bar button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+aside {
+    float: left;
+    width: 20%;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+
+
+main {
+    float: right;
+    width: 75%;
+    padding: 20px;
+}
+.campaingList{
+    align-items: center;
+    align-content: center;
+    justify-content: align-center;
+}
+.boton{
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.filter{
+    visibility: hidden;
+    opacity: 0;
+    order: 1;
+}
